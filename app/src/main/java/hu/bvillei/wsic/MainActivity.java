@@ -30,15 +30,22 @@ public class MainActivity extends AppCompatActivity {
         vegetarianCheckBox = findViewById(R.id.vegetarianCheckBox);
         typeRadioGroup = findViewById(R.id.typeRadioGroup);
 
-        foodSet = new ArrayList<>();
-        foodSet.add(new Food(1, "Pizza", true, Type.MAIN));
-        foodSet.add(new Food(2, "Gyros", false, Type.MAIN));
-        foodSet.add(new Food(3, "Chicken soup", false, Type.SOUP));
-        foodSet.add(new Food(4, "Tiramisu", true, Type.DESSERT));
-        foodSet.add(new Food(5, "Muffin", true, Type.DESSERT));
-
         roll();
         viewAll();
+    }
+
+    public List<Food> getAllFoodFromDB() {
+        List<Food> list = new ArrayList<>();
+        Cursor res = myDb.getAllData();
+        while (res.moveToNext()) {
+            int id = res.getInt(0);
+            String name = res.getString(1);
+            boolean vegetarian = (res.getInt(2) == 1);
+            Type type = Type.valueOf(res.getString(3));
+
+            list.add(new Food(id, name, vegetarian, type));
+        }
+        return list;
     }
 
     public void viewAll() {
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 resultFoodList = filterListByType(Type.DESSERT);
                                 break;
                             default:
-                                resultFoodList = new ArrayList<>(foodSet);
+                                resultFoodList = new ArrayList<>(getAllFoodFromDB());
                         }
                         if (vegetarianCheckBox.isChecked()) {
                             resultFoodList.removeIf(food -> !(food.isVegetarian()));
@@ -99,6 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Food> filterListByType(Type foodType) {
-        return foodSet.stream().filter(food -> food.getType().equals(foodType)).collect(Collectors.toList());
+        return getAllFoodFromDB().stream().filter(food -> food.getType().equals(foodType)).collect(Collectors.toList());
     }
 }
