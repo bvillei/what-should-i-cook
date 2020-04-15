@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     TextView resultsTextView;
     CheckBox vegetarianCheckBox;
     RadioGroup typeRadioGroup;
-    List<Food> foodSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         typeRadioGroup = findViewById(R.id.typeRadioGroup);
 
         roll();
-        viewAll();
+        listAll();
     }
 
     public List<Food> getAllFoodFromDB() {
@@ -48,22 +47,22 @@ public class MainActivity extends AppCompatActivity {
         return list;
     }
 
-    public void viewAll() {
+    public void listAll() {
         listButton.setOnClickListener(
                 v -> {
-                    Cursor res = myDb.getAllData();
-                    if (res.getCount() == 0) {
+                    List<Food> foods = new ArrayList<>(getAllFoodFromDB());
+                    if (foods.isEmpty()) {
                         showMessage("Error", "No data found");
                         return;
                     }
                     StringBuilder buffer = new StringBuilder();
-                    while (res.moveToNext()) {
-                        buffer.append("Id :").append(res.getString(0)).append("\n");
-                        buffer.append("Name :").append(res.getString(1)).append("\n");
-                        buffer.append("Vegetarian :").append(res.getString(2)).append("\n");
-                        buffer.append("Type :").append(res.getString(3)).append("\n");
+                    for (Food food : foods) {
+                        buffer.append("Name: ").append(food.getName()).append(System.lineSeparator());
+                        buffer.append("Type: ").append(food.getType()).append(System.lineSeparator());
+                        if (food.isVegetarian()) {buffer.append("Vegetarian").append(System.lineSeparator());}
+                        buffer.append("\n");
                     }
-                    showMessage("Data", buffer.toString());
+                    showMessage("Cook one of this:", buffer.toString());
                 }
         );
     }
