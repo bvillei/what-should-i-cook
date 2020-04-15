@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WSIC</string>
+
+    <string-array name="food_type_array">
+        <item>SOUP</item>
+        <item>MAIN</item>
+        <item>DESSERT</item>
+    </string-array>
 </resources>

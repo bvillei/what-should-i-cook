@@ -42,35 +42,6 @@ public class MainActivity extends AppCompatActivity {
         navigateToAdd();
     }
 
-    public void navigateToAdd() {
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: Clicked addButton.");
-
-                Intent intent = new Intent(MainActivity.this, AddScreen.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-//    public void addData() {
-//        btnAddData.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        boolean isInserted = myDb.insertData(editName.getText().toString(),
-//                                editSurname.getText().toString(),
-//                                editMarks.getText().toString());
-//                        if (isInserted)
-//                            Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
-//                        else
-//                            Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
-//    }
-
     public List<Food> getAllFoodFromDB() {
         List<Food> list = new ArrayList<>();
         Cursor res = myDb.getAllData();
@@ -145,4 +116,17 @@ public class MainActivity extends AppCompatActivity {
     private List<Food> filterListByType(Type foodType) {
         return getAllFoodFromDB().stream().filter(food -> food.getType().equals(foodType)).collect(Collectors.toList());
     }
+
+    private void navigateToAdd() {
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: Clicked addButton.");
+
+                Intent intent = new Intent(MainActivity.this, AddScreen.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }
