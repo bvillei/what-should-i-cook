@@ -1,6 +1,9 @@
 package hu.bvillei.wsic;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +14,10 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     DatabaseHelper myDb;
-    Button rollButton, listButton;
+    Button rollButton, listButton, addButton;
     TextView resultsTextView;
     CheckBox vegetarianCheckBox;
     RadioGroup typeRadioGroup;
@@ -21,17 +26,50 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: Starting.");
+
         myDb = new DatabaseHelper(this);
 
         rollButton = findViewById(R.id.rollButton);
         listButton = findViewById(R.id.listButton);
+        addButton = findViewById(R.id.addButton);
         resultsTextView = findViewById(R.id.resultsTextView);
         vegetarianCheckBox = findViewById(R.id.vegetarianCheckBox);
         typeRadioGroup = findViewById(R.id.typeRadioGroup);
 
         roll();
         listAll();
+        navigateToAdd();
     }
+
+    public void navigateToAdd() {
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: Clicked addButton.");
+
+                Intent intent = new Intent(MainActivity.this, AddScreen.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+//    public void addData() {
+//        btnAddData.setOnClickListener(
+//                new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        boolean isInserted = myDb.insertData(editName.getText().toString(),
+//                                editSurname.getText().toString(),
+//                                editMarks.getText().toString());
+//                        if (isInserted)
+//                            Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+//                        else
+//                            Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//        );
+//    }
 
     public List<Food> getAllFoodFromDB() {
         List<Food> list = new ArrayList<>();
