@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button rollButton, listButton, addButton;
     TextView resultsTextView;
     CheckBox vegetarianCheckBox;
-    RadioGroup typeRadioGroup;
+    Spinner typeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addButton);
         resultsTextView = findViewById(R.id.resultsTextView);
         vegetarianCheckBox = findViewById(R.id.vegetarianCheckBox);
-        typeRadioGroup = findViewById(R.id.typeRadioGroup);
+        typeSpinner = findViewById(R.id.typeSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.food_type_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(adapter);
 
         roll();
         listAll();
@@ -87,21 +91,8 @@ public class MainActivity extends AppCompatActivity {
     public void roll() {
         rollButton.setOnClickListener(
                 v -> {
-                    List<Food> resultFoodList;
                     try {
-                        switch (typeRadioGroup.getCheckedRadioButtonId()) {
-                            case (R.id.soupRadioButton):
-                                resultFoodList = filterListByType(Type.SOUP);
-                                break;
-                            case (R.id.mainRadioButton):
-                                resultFoodList = filterListByType(Type.MAIN);
-                                break;
-                            case (R.id.dessertRadioButton):
-                                resultFoodList = filterListByType(Type.DESSERT);
-                                break;
-                            default:
-                                resultFoodList = new ArrayList<>(getAllFoodFromDB());
-                        }
+                        List <Food>resultFoodList = filterListByType(Type.valueOf(typeSpinner.getSelectedItem().toString()));
                         if (vegetarianCheckBox.isChecked()) {
                             resultFoodList.removeIf(food -> !(food.isVegetarian()));
                         }
