@@ -42,43 +42,12 @@ public class MainActivity extends AppCompatActivity {
         typeSpinner.setAdapter(adapter);
 
         roll();
-        listAll();
+//        listAll();
         navigateToAdd();
+        navigateToList();
     }
 
-    public List<Food> getAllFoodFromDB() {
-        List<Food> list = new ArrayList<>();
-        Cursor res = myDb.getAllData();
-        while (res.moveToNext()) {
-            int id = res.getInt(0);
-            String name = res.getString(1);
-            boolean vegetarian = (res.getInt(2) == 1);
-            Type type = Type.valueOf(res.getString(3));
 
-            list.add(new Food(id, name, vegetarian, type));
-        }
-        return list;
-    }
-
-    public void listAll() {
-        listButton.setOnClickListener(
-                v -> {
-                    List<Food> foods = new ArrayList<>(getAllFoodFromDB());
-                    if (foods.isEmpty()) {
-                        showMessage("Error", "No data found");
-                        return;
-                    }
-                    StringBuilder buffer = new StringBuilder();
-                    for (Food food : foods) {
-                        buffer.append("Name: ").append(food.getName()).append(System.lineSeparator());
-                        buffer.append("Type: ").append(food.getType()).append(System.lineSeparator());
-                        if (food.isVegetarian()) {buffer.append("Vegetarian").append(System.lineSeparator());}
-                        buffer.append("\n");
-                    }
-                    showMessage("Cook one of this:", buffer.toString());
-                }
-        );
-    }
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -105,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Food> filterListByType(Type foodType) {
-        return getAllFoodFromDB().stream().filter(food -> food.getType().equals(foodType)).collect(Collectors.toList());
+        return myDb.getAllFoodFromDB().stream().filter(food -> food.getType().equals(foodType)).collect(Collectors.toList());
     }
 
     private void navigateToAdd() {
@@ -120,4 +89,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void navigateToList() {
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: Clicked listButton.");
+
+                Intent intent = new Intent(MainActivity.this, ListScreen.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

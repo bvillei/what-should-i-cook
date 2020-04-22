@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Food.db";
     public static final String TABLE_NAME = "food_table";
@@ -55,4 +58,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
+    public List<Food> getAllFoodFromDB() {
+        List<Food> list = new ArrayList<>();
+        Cursor res = this.getAllData();
+        while (res.moveToNext()) {
+            int id = res.getInt(0);
+            String name = res.getString(1);
+            boolean vegetarian = (res.getInt(2) == 1);
+            Type type = Type.valueOf(res.getString(3));
+
+            list.add(new Food(id, name, vegetarian, type));
+        }
+        return list;
+    }
 }
