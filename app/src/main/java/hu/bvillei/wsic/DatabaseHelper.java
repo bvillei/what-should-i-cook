@@ -71,4 +71,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return list;
     }
+
+    public Integer deleteData(Food food) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "ID = ?", new String[] {String.valueOf(food.getId())});
+    }
 }

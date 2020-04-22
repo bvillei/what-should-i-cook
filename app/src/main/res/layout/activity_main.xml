@@ -8,37 +8,26 @@
         tools:context=".MainActivity" android:background="#F4EB97">
     <Button
             android:text="Roll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/rollButton"
-            app:layout_constraintBottom_toBottomOf="@+id/typeSpinner"
-            app:layout_constraintStart_toEndOf="@+id/typeSpinner"
-            app:layout_constraintEnd_toStartOf="@+id/vegetarianCheckBox" android:layout_marginEnd="53dp"
-            android:layout_marginRight="53dp"/>
+            android:layout_width="0dp"
+            android:layout_height="99dp" android:id="@+id/rollButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="2dp"/>
     <View
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="134dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="1dp"
-            android:layout_marginStart="1dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="1dp" android:layout_marginRight="1dp"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="199dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/resultsTextView"
             android:textSize="100sp" android:gravity="center"
-            android:layout_marginTop="230dp"
-            android:layout_marginBottom="230dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/divider" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-    <CheckBox
-            android:text="Vegetarian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/vegetarianCheckBox"
-            android:textColorLink="#5C5C5C"
-            app:layout_constraintStart_toEndOf="@+id/rollButton" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="49dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
+            android:layout_marginTop="198dp"
+            android:layout_marginBottom="199dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/divider"/>
     <Button
             android:text="Show All"
             android:layout_width="wrap_content"
@@ -52,12 +41,19 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
     <Spinner
-            android:layout_width="0dp"
+            android:layout_width="154dp"
             android:layout_height="53dp" android:id="@+id/typeSpinner"
-            android:layout_marginTop="38dp"
-            app:layout_constraintEnd_toStartOf="@+id/rollButton" android:layout_marginBottom="45dp"
-            app:layout_constraintTop_toTopOf="@+id/divider" app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="23dp"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="17dp"
-            android:layout_marginRight="17dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/divider" android:layout_marginBottom="22dp"
+            app:layout_constraintBottom_toTopOf="@+id/rollButton"/>
+    <Switch
+            android:text="Vegetarian"
+            android:layout_width="117dp"
+            android:layout_height="28dp" android:id="@+id/vegetarianSwitch"
+            android:layout_marginTop="34dp"
+            app:layout_constraintTop_toBottomOf="@+id/divider" android:layout_marginBottom="34dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/rollButton"
+            android:layout_marginEnd="28dp" android:layout_marginRight="28dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

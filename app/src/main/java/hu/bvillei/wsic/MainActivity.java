@@ -1,7 +1,6 @@
 package hu.bvillei.wsic;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDb;
     Button rollButton, listButton, addButton;
     TextView resultsTextView;
-    CheckBox vegetarianCheckBox;
+    Switch vegetarianSwitch;
     Spinner typeSpinner;
 
     @Override
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         listButton = findViewById(R.id.listButton);
         addButton = findViewById(R.id.addButton);
         resultsTextView = findViewById(R.id.resultsTextView);
-        vegetarianCheckBox = findViewById(R.id.vegetarianCheckBox);
+        vegetarianSwitch = findViewById(R.id.vegetarianSwitch);
         typeSpinner = findViewById(R.id.typeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.food_type_array, android.R.layout.simple_spinner_item);
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 v -> {
                     try {
                         List <Food>resultFoodList = filterListByType(Type.valueOf(typeSpinner.getSelectedItem().toString()));
-                        if (vegetarianCheckBox.isChecked()) {
+                        if (vegetarianSwitch.isChecked()) {
                             resultFoodList.removeIf(food -> !(food.isVegetarian()));
                         }
                         resultsTextView.setText(resultFoodList.get(new Random().nextInt(resultFoodList.size())).getName());
