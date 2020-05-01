@@ -13,7 +13,7 @@ public class AddScreen extends AppCompatActivity {
     private static final String TAG = "AddScreen";
     DatabaseHelper myDb;
     EditText nameInput;
-    Button submitButton, backButton;
+    Button submitButton;
     CheckBox vegetarianInput;
     Spinner typeInput;
 
@@ -27,7 +27,6 @@ public class AddScreen extends AppCompatActivity {
 
         nameInput = findViewById(R.id.nameInput);
         submitButton = findViewById(R.id.submitButton);
-        backButton = findViewById(R.id.backButton);
         vegetarianInput = findViewById(R.id.vegetarianInput);
         typeInput = findViewById(R.id.typeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -35,7 +34,6 @@ public class AddScreen extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeInput.setAdapter(adapter);
 
-        navigateBack();
         addFood();
     }
 
@@ -57,17 +55,5 @@ public class AddScreen extends AppCompatActivity {
                     }
                 }
         );
-    }
-
-    private void navigateBack() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked backButton.");
-
-                Intent intent = new Intent(AddScreen.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WSIC</string>
+    <string name="app_name">What Should I Cook</string>
 
     <string-array name="food_type_array">
         <item>SOUP</item>

@@ -3,44 +3,44 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_height="match_parent"
+                                                   android:background="@color/colorBackground">
 
     <Button
-            android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/backButton"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"/>
-    <Button
             android:text="Submit"
-            android:layout_width="wrap_content"
+            android:layout_width="107dp"
             android:layout_height="wrap_content" android:id="@+id/submitButton"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="48dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/backButton"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameInput" android:layout_marginBottom="390dp"/>
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="387dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/nameInput"
             android:hint="Name of the food"
             android:visibility="visible" tools:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="89dp" app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="118dp"
+            android:layout_marginBottom="119dp"/>
     <CheckBox
             android:text="Vegetarian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/vegetarianInput"
-            android:layout_marginTop="142dp"
-            android:layout_marginBottom="142dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/typeSpinner" app:layout_constraintTop_toTopOf="@+id/nameInput"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/nameInput"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton"
+            app:layout_constraintStart_toEndOf="@+id/typeSpinner" android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp" app:layout_constraintEnd_toEndOf="parent"/>
     <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/typeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="50dp" android:id="@+id/typeSpinner"
             android:spinnerMode="dropdown"
             tools:visibility="visible" android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="142dp" app:layout_constraintBottom_toTopOf="@+id/submitButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/nameInput"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="28dp" android:layout_marginStart="28dp"
+            app:layout_constraintEnd_toStartOf="@+id/vegetarianInput" android:layout_marginEnd="118dp"
+            android:layout_marginRight="118dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDb;
     Button rollButton, listButton, addButton;
     TextView resultsTextView;
-    Switch vegetarianSwitch;
+    CheckBox vegetarianCheckBox;
     Spinner typeSpinner;
 
     @Override
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         listButton = findViewById(R.id.listButton);
         addButton = findViewById(R.id.addButton);
         resultsTextView = findViewById(R.id.resultsTextView);
-        vegetarianSwitch = findViewById(R.id.vegetarianSwitch);
+        vegetarianCheckBox = findViewById(R.id.vegetarianCheckBox);
         typeSpinner = findViewById(R.id.typeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.food_type_array, android.R.layout.simple_spinner_item);
@@ -41,19 +40,8 @@ public class MainActivity extends AppCompatActivity {
         typeSpinner.setAdapter(adapter);
 
         roll();
-//        listAll();
         navigateToAdd();
         navigateToList();
-    }
-
-
-
-    public void showMessage(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
     }
 
     public void roll() {
@@ -61,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 v -> {
                     try {
                         List <Food>resultFoodList = filterListByType(Type.valueOf(typeSpinner.getSelectedItem().toString()));
-                        if (vegetarianSwitch.isChecked()) {
+                        if (vegetarianCheckBox.isChecked()) {
                             resultFoodList.removeIf(food -> !(food.isVegetarian()));
                         }
                         resultsTextView.setText(resultFoodList.get(new Random().nextInt(resultFoodList.size())).getName());
